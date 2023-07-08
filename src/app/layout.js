@@ -5,6 +5,7 @@ import AuthProvider from "./_Provider/AuthProvider/AuthProvider";
 import "sweetalert2/src/sweetalert2.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "swiper/css";
 
 const inter = Inter({ subsets: ["latin"] });
 

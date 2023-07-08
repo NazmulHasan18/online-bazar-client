@@ -6,6 +6,10 @@ const nextConfig = {
             protocol: "https",
             hostname: "assets.adidas.com",
          },
+         {
+            protocol: "https",
+            hostname: "i.ibb.co",
+         },
       ],
    },
 };
