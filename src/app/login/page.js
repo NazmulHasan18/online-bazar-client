@@ -1,16 +1,38 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import React from "react";
 import ButtonOutline from "../components/ButtonOutline";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const page = () => {
+   const { signInWithEmailPass } = useAuth();
    const {
       register,
       handleSubmit,
       formState: { errors },
-      // eslint-disable-next-line react-hooks/rules-of-hooks
    } = useForm();
-   const onSubmit = (data) => console.log(data);
+   const onSubmit = (data) => {
+      signInWithEmailPass(data.email, data.password)
+         .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            Swal.fire({
+               position: "center",
+               icon: "success",
+               title: "User Logged in Successful",
+               showConfirmButton: false,
+               timer: 1500,
+            });
+            console.log(user);
+         })
+         .catch((error) => {
+            const errorMessage = error.message;
+            console.log(errorMessage);
+         });
+   };
 
    return (
       <div className="hero min-h-screen rounded-xl bg-white container mx-auto">
@@ -49,6 +71,14 @@ const page = () => {
                         </a>
                      </label>
                   </div>
+
+                  <p>
+                     New Here
+                     <Link href="/register" className="btn pl-2 btn-link normal-case">
+                        Sign Up!
+                     </Link>
+                  </p>
+
                   <div className="form-control mt-6">
                      <ButtonOutline>Login</ButtonOutline>
                   </div>

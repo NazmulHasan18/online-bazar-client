@@ -1,12 +1,30 @@
 "use client";
 
 import Button from "@/app/components/Button";
+import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
    const pathname = usePathname();
-   console.log(pathname);
+   const { user, logOut } = useAuth();
+
+   const handelLogOut = () => {
+      logOut()
+         .then(() => {
+            Swal.fire({
+               position: "center",
+               icon: "success",
+               title: "User Log Out Successful",
+               showConfirmButton: false,
+               timer: 1500,
+            });
+         })
+         .catch((error) => {
+            console.log(error);
+         });
+   };
 
    const navLink = (
       <>
@@ -15,16 +33,19 @@ const Navbar = () => {
                Home
             </Link>
          </li>
-         <li>
-            <Link href="/login" className={`${pathname === "/login" && "text-orange-600"}`}>
-               Login
-            </Link>
-         </li>
-         <li>
-            <a>Item 3</a>
-         </li>
-
-         <Button>Log Out</Button>
+         {user ? (
+            <>
+               <Button onClickFunction={handelLogOut}>Log Out</Button>
+            </>
+         ) : (
+            <>
+               <li>
+                  <Link href="/login" className={`${pathname === "/login" && "text-orange-600"}`}>
+                     Login
+                  </Link>
+               </li>
+            </>
+         )}
       </>
    );
 
