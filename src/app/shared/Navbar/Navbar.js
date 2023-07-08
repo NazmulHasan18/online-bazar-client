@@ -33,6 +33,11 @@ const Navbar = () => {
                Home
             </Link>
          </li>
+         <li>
+            <Link href="/products" className={`${pathname === "/" && "text-orange-600"} `}>
+               Products
+            </Link>
+         </li>
          {user ? (
             <>
                <Button onClickFunction={handelLogOut}>Log Out</Button>
