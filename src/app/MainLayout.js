@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import AuthProvider from "./_Provider/AuthProvider/AuthProvider";
 import Navbar from "./shared/Navbar/Navbar";
 import { ToastContainer } from "react-toastify";
+import Footer from "./shared/Footer/Footer";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ const MainLayout = ({ children }) => {
                   <Navbar></Navbar>
                </header>
                {children}
+               <Footer></Footer>
                <ToastContainer />
             </AuthProvider>
          </QueryClientProvider>

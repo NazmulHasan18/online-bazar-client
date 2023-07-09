@@ -54,7 +54,7 @@ const Navbar = () => {
                <li>
                   <Link href="/carts" className={`${pathname === "/carts" && "text-orange-600"} `}>
                      My Carts
-                     <div className="badge badge-secondary">+{carts?.length}</div>
+                     <div className="badge badge-secondary">+{carts?.length || 0}</div>
                   </Link>
                </li>
                <li>

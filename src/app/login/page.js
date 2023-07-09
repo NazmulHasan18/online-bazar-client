@@ -6,9 +6,15 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const page = () => {
    const { signInWithEmailPass } = useAuth();
+   const router = useRouter();
+
+   const searchParams = useSearchParams();
+   const from = searchParams.get("from") || "/";
+
    const {
       register,
       handleSubmit,
@@ -26,6 +32,7 @@ const page = () => {
                showConfirmButton: false,
                timer: 1500,
             });
+            router.push(from);
             console.log(user);
          })
          .catch((error) => {

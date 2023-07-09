@@ -6,14 +6,15 @@ import ButtonOutline from "@/app/components/ButtonOutline";
 import useAuth from "@/app/hooks/useAuth";
 import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import Swal from "sweetalert2";
 
 const page = ({ params }) => {
    const { user } = useAuth();
-   const router = useRouter();
+   const pathname = usePathname();
    const [loading, setLoading] = useState(true);
    const [product, setProduct] = useState({});
 
@@ -44,10 +45,6 @@ const page = ({ params }) => {
    }
 
    const handelAddToCart = () => {
-      if (!user) {
-         router.push("/login");
-         return null;
-      }
       console.log("axios doing");
       axiosInstance.put(`cart/${_id}?email=${user.email}`, { product }).then((res) => {
          if (res.data.modifiedCount || res.data.insertedId) {
@@ -87,12 +84,20 @@ const page = ({ params }) => {
                <button className="btn bg-orange-600 text-white text-lg w-1/2 hover:bg-orange-700 ">
                   Buy Now
                </button>
-               <button
-                  className="btn bg-sky-500 text-white text-lg w-1/2 hover:bg-sky-700 "
-                  onClick={handelAddToCart}
-               >
-                  Add To Cart
-               </button>
+               {user ? (
+                  <button
+                     className="btn bg-sky-500 text-white text-lg w-1/2 hover:bg-sky-700 "
+                     onClick={handelAddToCart}
+                  >
+                     Add To Cart
+                  </button>
+               ) : (
+                  <Link className="w-1/2" href={`/login?from=${pathname}`}>
+                     <button className="btn bg-sky-500 text-white text-lg hover:bg-sky-700 w-full">
+                        Add To Cart
+                     </button>
+                  </Link>
+               )}
             </div>
          </div>
       </div>

@@ -6,9 +6,11 @@ import ButtonOutline from "../components/ButtonOutline";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 const page = () => {
    const { signUpWithEmailPass, updateUser } = useAuth();
+   const router = useRouter();
 
    const {
       register,
@@ -29,6 +31,7 @@ const page = () => {
                         showConfirmButton: false,
                         timer: 1500,
                      });
+                     router.push("/");
                      console.log(user);
                   })
                   .catch((error) => {
