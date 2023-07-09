@@ -5,11 +5,33 @@ import Product from "./Product";
 
 const page = () => {
    const [products, setProducts] = useState([]);
+   const [loading, setLoading] = useState(true);
    useEffect(() => {
       fetch("http://localhost:5000/products")
          .then((res) => res.json())
-         .then((data) => setProducts(data));
+         .then((data) => {
+            setProducts(data);
+            setLoading(false);
+         });
    }, []);
+
+   if (loading) {
+      return (
+         <div className="flex justify-center items-center h-[80vh]">
+            <div>
+               <span className="loading loading-spinner loading-lg text-primary"></span>
+               <span className="loading loading-spinner loading-lg text-secondary"></span>
+               <span className="loading loading-spinner loading-lg text-accent"></span>
+               <span className="loading loading-spinner loading-lg text-neutral"></span>
+               <span className="loading loading-spinner loading-lg text-info"></span>
+               <span className="loading loading-spinner loading-lg text-success"></span>
+               <span className="loading loading-spinner loading-lg text-warning"></span>
+               <span className="loading loading-spinner loading-lg text-error"></span>
+            </div>
+         </div>
+      );
+   }
+
    return (
       <div className="py-6 container mx-auto">
          <div className="grid grid-cols-4 gap-4 justify-around">

@@ -34,7 +34,7 @@ const Navbar = () => {
             </Link>
          </li>
          <li>
-            <Link href="/products" className={`${pathname === "/" && "text-orange-600"} `}>
+            <Link href="/products" className={`${pathname === "/products" && "text-orange-600"} `}>
                Products
             </Link>
          </li>
