@@ -8,6 +8,14 @@ import MainLayout from "./MainLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const metadata = {
+   title: "Online Bazar",
+   description: "A trusted market place to connect",
+   icons: {
+      icon: "./favicon.png",
+   },
+};
+
 export default function RootLayout({ children }) {
    return (
       <html lang="en">
