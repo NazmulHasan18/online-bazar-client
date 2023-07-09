@@ -42,8 +42,7 @@ const AuthProvider = ({ children }) => {
       });
       if (user) {
          axios.post("http://localhost:5000/jwt", { email: user.email }).then((res) => {
-            console.log(res.data.token);
-            localStorage.setItem("jwt-token", JSON.stringify(res.data.token));
+            localStorage.setItem("jwt-token", res.data.token);
          });
       } else {
          localStorage.removeItem("jwt-token");

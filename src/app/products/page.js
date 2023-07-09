@@ -34,6 +34,9 @@ const page = () => {
 
    return (
       <div className="py-6 container mx-auto">
+         <h2 className="text-4xl text-center my-10 font-bold">
+            All <span className="text-orange-600">Products</span>
+         </h2>
          <div className="grid grid-cols-4 gap-4 justify-around">
             {products.map((product) => (
                <Product key={product._id} product={product}></Product>

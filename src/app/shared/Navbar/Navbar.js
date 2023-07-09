@@ -1,14 +1,25 @@
 "use client";
 
+import axiosInstance from "@/app/_api/axiosInstance";
 import Button from "@/app/components/Button";
 import useAuth from "@/app/hooks/useAuth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useQuery } from "react-query";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
    const pathname = usePathname();
    const { user, logOut } = useAuth();
+
+   const { data: carts } = useQuery({
+      queryKey: ["carts", user],
+      queryFn: async () => {
+         const data = await axiosInstance.get(`/carts/${user?.email}`);
+         return data.data;
+      },
+   });
 
    const handelLogOut = () => {
       logOut()
@@ -40,6 +51,12 @@ const Navbar = () => {
          </li>
          {user ? (
             <>
+               <li>
+                  <Link href="/carts" className={`${pathname === "/carts" && "text-orange-600"} `}>
+                     My Carts
+                     <div className="badge badge-secondary">+{carts?.length}</div>
+                  </Link>
+               </li>
                <Button onClickFunction={handelLogOut}>Log Out</Button>
             </>
          ) : (

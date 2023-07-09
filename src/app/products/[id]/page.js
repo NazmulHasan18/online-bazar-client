@@ -1,13 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
+import axiosInstance from "@/app/_api/axiosInstance";
 import Button from "@/app/components/Button";
 import ButtonOutline from "@/app/components/ButtonOutline";
+import useAuth from "@/app/hooks/useAuth";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
+import Swal from "sweetalert2";
 
 const page = ({ params }) => {
+   const { user } = useAuth();
+   const router = useRouter();
    const [loading, setLoading] = useState(true);
    const [product, setProduct] = useState({});
 
@@ -15,7 +21,6 @@ const page = ({ params }) => {
 
    useEffect(() => {
       axios.get(`http://localhost:5000/product/${params.id}`).then((res) => {
-         console.log(res.data);
          setProduct(res.data);
          setLoading(false);
       });
@@ -37,6 +42,27 @@ const page = ({ params }) => {
          </div>
       );
    }
+
+   const handelAddToCart = () => {
+      if (!user) {
+         router.push("/login");
+         return null;
+      }
+      console.log("axios doing");
+      axiosInstance.put(`cart/${_id}?email=${user.email}`, { product }).then((res) => {
+         if (res.data.modifiedCount || res.data.insertedId) {
+            Swal.fire({
+               position: "center",
+               icon: "success",
+               title: "Product added to cart successful",
+               showConfirmButton: false,
+               timer: 1500,
+            });
+         }
+
+         console.log(res.data);
+      });
+   };
 
    return (
       <div className="card lg:card-side bg-base-100 shadow-xl container mx-auto p-4">
@@ -61,7 +87,10 @@ const page = ({ params }) => {
                <button className="btn bg-orange-600 text-white text-lg w-1/2 hover:bg-orange-700 ">
                   Buy Now
                </button>
-               <button className="btn bg-sky-500 text-white text-lg w-1/2 hover:bg-sky-700 ">
+               <button
+                  className="btn bg-sky-500 text-white text-lg w-1/2 hover:bg-sky-700 "
+                  onClick={handelAddToCart}
+               >
                   Add To Cart
                </button>
             </div>
