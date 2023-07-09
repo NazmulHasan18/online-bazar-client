@@ -6,7 +6,7 @@ import ButtonOutline from "../components/ButtonOutline";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const page = () => {
    const { signUpWithEmailPass, updateUser } = useAuth();
