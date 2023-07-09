@@ -35,3 +35,5 @@ Live Site: https://online-bazar-client-g27o.vercel.app/
 
 Git hub-client repo: https://github.com/NazmulHasan18/online-bazar-client
 Git hub-server repo: https://github.com/NazmulHasan18/online-bazar-server
+
+## Server Site and client site deployed to vercel

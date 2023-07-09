@@ -41,9 +41,11 @@ const AuthProvider = ({ children }) => {
          setUser(user);
       });
       if (user) {
-         axios.post("http://localhost:5000/jwt", { email: user.email }).then((res) => {
-            localStorage.setItem("jwt-token", res.data.token);
-         });
+         axios
+            .post("https://online-bazar-server-nazmulhasan18.vercel.app/jwt", { email: user.email })
+            .then((res) => {
+               localStorage.setItem("jwt-token", res.data.token);
+            });
       } else {
          localStorage.removeItem("jwt-token");
          console.log("no user");

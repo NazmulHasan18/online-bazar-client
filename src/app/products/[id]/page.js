@@ -21,7 +21,7 @@ const page = ({ params }) => {
    const { img, ratingsCount, name, price, ratings, seller, _id, stock, shipping } = product;
 
    useEffect(() => {
-      axios.get(`http://localhost:5000/product/${params.id}`).then((res) => {
+      axios.get(`https://online-bazar-server-nazmulhasan18.vercel.app/product/${params.id}`).then((res) => {
          setProduct(res.data);
          setLoading(false);
       });

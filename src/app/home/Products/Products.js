@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 const Products = () => {
    const [products, setProducts] = useState([]);
    useEffect(() => {
-      axios.get("http://localhost:5000/products").then((res) => {
+      axios.get("https://online-bazar-server-nazmulhasan18.vercel.app/products").then((res) => {
          setProducts(res.data.slice(0, 8));
       });
    }, []);
