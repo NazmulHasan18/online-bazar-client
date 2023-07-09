@@ -12,14 +12,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const inter = Inter({ subsets: ["latin"] });
 const queryClient = new QueryClient();
 
-export const metadata = {
-   title: "Online Bazar",
-   description: "A trusted market place to connect",
-   icons: {
-      icon: "./favicon.png",
-   },
-};
-
 export default function RootLayout({ children }) {
    return (
       <html lang="en">
