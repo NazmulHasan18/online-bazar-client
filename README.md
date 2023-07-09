@@ -29,6 +29,8 @@ password: 123456
 
 5. Admin Order List and Admin Order Detail View
 
+used Tools: Next js, Firebase, JWT, Axios, React Query, Node js, express.js and mongodb for backend.
+
 Live Site: https://online-bazar-client-g27o.vercel.app/
 
 Git hub-client repo: https://github.com/NazmulHasan18/online-bazar-client
