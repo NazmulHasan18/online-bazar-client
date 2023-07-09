@@ -7,9 +7,15 @@ import React from "react";
 import { useQuery } from "react-query";
 import axiosInstance from "@/app/_api/axiosInstance";
 import { FaTrashAlt } from "react-icons/fa";
+import Link from "next/link";
+import Swal from "sweetalert2";
 
 const page = () => {
-   const { data: orders = [], isLoading } = useQuery({
+   const {
+      data: orders = [],
+      refetch,
+      isLoading,
+   } = useQuery({
       queryKey: ["orders"],
       queryFn: async () => {
          const data = await axiosInstance.get("/carts");
@@ -17,6 +23,28 @@ const page = () => {
          return data.data;
       },
    });
+
+   const handelDelete = (id) => {
+      Swal.fire({
+         title: "Are you sure?",
+         text: "You won't be able to revert this!",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            axiosInstance.delete(`/cart/${id}`).then((res) => {
+               console.log(res.data);
+               if (res.data.deletedCount > 0) {
+                  refetch();
+                  Swal.fire("Deleted!", "Your file has been deleted.", "success");
+               }
+            });
+         }
+      });
+   };
 
    if (isLoading) {
       return (
@@ -77,8 +105,13 @@ const page = () => {
                            <td>User Email: {order.email}</td>
                            <td className="flex flex-col gap-2">
                               <button className="btn btn-warning btn-xs">Pending</button>
-                              <button className="btn btn-info btn-xs">Details</button>
-                              <button className="btn btn-error btn-xs">
+                              <Link href={`/dashboard/orderList/${order._id}`}>
+                                 <button className="btn btn-info btn-xs">Details</button>
+                              </Link>
+                              <button
+                                 className="btn btn-error btn-xs"
+                                 onClick={() => handelDelete(order._id)}
+                              >
                                  <FaTrashAlt></FaTrashAlt>
                               </button>
                            </td>

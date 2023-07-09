@@ -30,7 +30,7 @@ const DashboardNavbar = ({ children }) => {
                      <Link href="/dashboard/orderList">Order List</Link>
                   </li>
                   <li className="hover:text-white">
-                     <Link href="/dashboard">Manage Product</Link>
+                     <Link href="/dashboard/manageProducts">Manage Product</Link>
                   </li>
                </ul>
             </div>
