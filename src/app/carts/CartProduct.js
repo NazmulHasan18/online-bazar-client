@@ -19,7 +19,7 @@ const CartProduct = ({ cart }) => {
             <Link href={`/products/${_id}`}>
                <button className="btn btn-success">Details</button>
             </Link>
-            <Link href={`/payments?price=${price * quantity}`}>
+            <Link href={`/dashboard/payments?price=${price * quantity}`}>
                <button className="btn btn-warning">Pay Now</button>
             </Link>
             <button className="btn btn-error">Delete</button>

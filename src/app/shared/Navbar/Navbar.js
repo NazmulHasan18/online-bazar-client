@@ -57,6 +57,11 @@ const Navbar = () => {
                      <div className="badge badge-secondary">+{carts?.length}</div>
                   </Link>
                </li>
+               <li>
+                  <Link href="/dashboard" className={`${pathname === "/dashboard" && "text-orange-600"} `}>
+                     Dashboard
+                  </Link>
+               </li>
                <Button onClickFunction={handelLogOut}>Log Out</Button>
             </>
          ) : (

@@ -47,7 +47,7 @@ const page = () => {
          <div className="flex gap-5 justify-between text-center mb-6">
             <h2 className="text-2xl font-bold">Total Added Products: {totalProduct}</h2>
             <h2 className="text-2xl font-bold">Total Price: {totalPrice}TK</h2>
-            <Link href="/payment">
+            <Link href={`/dashboard/payments?price=${totalPrice}`}>
                <ButtonOutline>Pay Now</ButtonOutline>
             </Link>
          </div>
